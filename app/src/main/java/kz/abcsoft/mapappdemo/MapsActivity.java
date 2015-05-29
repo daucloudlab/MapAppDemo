@@ -3,6 +3,7 @@ package kz.abcsoft.mapappdemo;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
@@ -60,7 +61,7 @@ public class MapsActivity extends FragmentActivity {
      * This should only be called once and when we are sure that {@link #mMap} is not null.
      */
     private void setUpMap() {
-        mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
+       // mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
 
         mMap.setMyLocationEnabled(true);
 
@@ -68,19 +69,22 @@ public class MapsActivity extends FragmentActivity {
         mMap.getUiSettings().setCompassEnabled(true);
         mMap.getUiSettings().setMyLocationButtonEnabled(true);
 
-        mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
-        //mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+//        mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+        mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         //mMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
         //mMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
         //mMap.setMapType(GoogleMap.MAP_TYPE_NONE);
 
         mMap.setTrafficEnabled(true);
 
-        mMap.getUiSettings().setRotateGesturesEnabled(true);
-        mMap.getUiSettings().setScrollGesturesEnabled(true);
-        mMap.getUiSettings().setTiltGesturesEnabled(true);
-        mMap.getUiSettings().setZoomGesturesEnabled(true);
-// или все сразу
-//        mMap.getUiSettings().setAllGesturesEnabled(true);
+        LatLng cat_monument_position = new LatLng(59.93467, 30.33763);
+
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(cat_monument_position,
+                13));
+
+        mMap.addMarker(new MarkerOptions().title("Памятник коту")
+                .snippet("Памятник коту Елизару")
+                .position(cat_monument_position));
+
     }
 }
